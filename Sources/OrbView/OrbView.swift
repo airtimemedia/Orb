@@ -8,9 +8,9 @@ import SwiftUI
 
 public struct OrbView: View {
     private let config: OrbConfiguration
-    @Binding var isAnimating: Bool = false
-    
-    public init(configuration: OrbConfiguration = OrbConfiguration(), isAnimating: Bool) {
+    @State var isAnimating: Bool
+
+    public init(configuration: OrbConfiguration = OrbConfiguration(), isAnimating: Bool = false) {
         self.config = configuration
         self.isAnimating = isAnimating
     }
@@ -228,7 +228,7 @@ public struct OrbView: View {
 }
 
 #Preview {
-    let config = OrbConfiguration()
+    let config = OrbConfiguration(showParticles: false)
     OrbView(configuration: config)
         .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: 120)
