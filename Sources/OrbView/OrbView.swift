@@ -7,14 +7,12 @@
 import SwiftUI
 
 public struct OrbView: View {
-    @Environment(\.scenePhase) var scenePhase
-    @State private var isAnimating: Bool = true
-    @State private var resumedFromBG = false
-
     private let config: OrbConfiguration
+    @Binding var isAnimating: Bool = false
     
-    public init(configuration: OrbConfiguration = OrbConfiguration()) {
+    public init(configuration: OrbConfiguration = OrbConfiguration(), isAnimating: Bool) {
         self.config = configuration
+        self.isAnimating = isAnimating
     }
 
     public var body: some View {
@@ -63,24 +61,6 @@ public struct OrbView: View {
                     radius: size * 0.08
                 )
             )
-        }
-        .onChangeCompat(for: scenePhase) { oldPhase, newPhase in
-            if oldPhase == .background { resumedFromBG = true }
-
-            switch newPhase {
-            case .active:
-                Task {
-                    try await Task.sleep(nanoseconds: resumedFromBG ? 300_000_000 : 100_000_000)
-                    if resumedFromBG { resumedFromBG = false }
-                    isAnimating = true
-                }
-            case .background:
-                isAnimating = false
-            case .inactive:
-                isAnimating = false
-            @unknown default:
-                break
-            }
         }
     }
 
