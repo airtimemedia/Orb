@@ -8,7 +8,12 @@ import SwiftUI
 
 public struct OrbView: View {
     let config: OrbConfiguration
-    @State var isAnimating: Bool = false
+    @Binding var isAnimating: Bool
+
+    init(config: OrbConfiguration, isAnimating: Binding<Bool>) {
+        self.config = config
+        self._isAnimating = isAnimating
+    }
 
     public var body: some View {
         GeometryReader { geometry in
@@ -224,7 +229,7 @@ public struct OrbView: View {
 
 #Preview {
     let config = OrbConfiguration(showParticles: false)
-    OrbView(config: config, isAnimating: true)
+    OrbView(config: config, isAnimating: .constant(true))
         .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: 120)
 }
