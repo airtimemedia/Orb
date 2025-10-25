@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Orb",
     platforms: [
-        .iOS(.v17),
+        .iOS(.v16),
         .macOS(.v14),
         .tvOS(.v17),
         .watchOS(.v10),
