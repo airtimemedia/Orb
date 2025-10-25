@@ -64,7 +64,7 @@ public struct OrbView: View {
                 )
             )
         }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
+        .onChangeCompat(for: scenePhase) { oldPhase, newPhase in
             if oldPhase == .background { resumedFromBG = true }
 
             switch newPhase {
