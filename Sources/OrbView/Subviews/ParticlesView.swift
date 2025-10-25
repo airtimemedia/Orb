@@ -144,6 +144,7 @@ struct ParticlesView: View {
             opacityRange: opacityRange
         )
         scene.scaleMode = .aspectFit
+        scene.isPaused = !isAnimating
         return scene
     }
     
@@ -152,6 +153,7 @@ struct ParticlesView: View {
             SpriteView(scene: scene, options: [.allowsTransparency])
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .ignoresSafeArea()
+                .opacity(isAnimating ? 1 : 0)
                 .onChange(of: isAnimating) { newValue in
                     scene.isPaused = !newValue
                 }

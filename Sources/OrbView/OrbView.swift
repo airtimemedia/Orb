@@ -227,9 +227,19 @@ public struct OrbView: View {
     }
 }
 
+struct OrbContainer: View {
+    let size: CGFloat
+    let configuration: OrbConfiguration
+    @State var isAnimating: Bool = false
+
+    var body: some View {
+        Toggle("Animating", isOn: $isAnimating)
+        OrbView(config: configuration, isAnimating: $isAnimating)
+            .frame(width: size, height: size)
+    }
+}
+
 #Preview {
-    let config = OrbConfiguration(showParticles: false)
-    OrbView(config: config, isAnimating: .constant(true))
-        .aspectRatio(1, contentMode: .fit)
-        .frame(maxWidth: 120)
+    let config = OrbConfiguration()
+    OrbContainer(size: 150, configuration: config)
 }
