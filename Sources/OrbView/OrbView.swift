@@ -7,10 +7,10 @@
 import SwiftUI
 
 public struct OrbView: View {
-    let config: OrbConfiguration
-    @Binding var isAnimating: Bool
+    public let config: OrbConfiguration
+    @Binding public var isAnimating: Bool
 
-    init(config: OrbConfiguration, isAnimating: Binding<Bool>) {
+    public init(config: OrbConfiguration, isAnimating: Binding<Bool>) {
         self.config = config
         self._isAnimating = isAnimating
     }
